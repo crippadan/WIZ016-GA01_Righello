@@ -1,0 +1,18 @@
+[project]
+name = "Righello"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Wizren", email = "crippadan@gmail.com"},
+]
+dependencies = [
+    "pandas>=2.2.3",
+    "pyinstaller>=6.11.0",
+]
+requires-python = "==3.11.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
