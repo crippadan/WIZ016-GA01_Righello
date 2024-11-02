@@ -1,0 +1,22 @@
+1. Definire la logica del gioco
+
+    - Intro e regolamento nel readme
+    - Livelli sequenziali
+        - Senza save di log utente
+    - Il gioco può partire solo se viene inserito il nome di un avatar
+
+
+2. Definire i suggerimenti utili
+
+
+3. Sviluppare gioco con interfaccia (streamlit/flask/tkinter)
+
+    - flask perché più trasversale o streamlit/tkinter perché più semplice?
+
+
+4. Deployare su colab come interfaccia da github main
+
+    - Scrivere readme.md
+    - Push su main
+    - Collegamento a colab
+        - Repo pubblica?
