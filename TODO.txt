@@ -9,9 +9,9 @@
 2. Definire i suggerimenti utili
 
 
-3. Sviluppare gioco con interfaccia (streamlit/flask/tkinter)
+3. Sviluppare gioco con interfaccia
 
-    - flask perché più trasversale o streamlit/tkinter perché più semplice?
+    - 
 
 
 4. Deployare su colab come interfaccia da github main
