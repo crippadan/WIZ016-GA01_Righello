@@ -8,7 +8,7 @@ import warnings
 warnings.simplefilter("ignore", category=DeprecationWarning)
 
 class Ruler:
-    def __init__(self):
+    def __init__(self, pw):
         self.input_text = widgets.Text(
             value='',
             placeholder='Scrivi qui...',
@@ -21,6 +21,7 @@ class Ruler:
         self.input_text.on_submit(self.on_submit)
         self.status = 0
         self.check = False
+        self.pw = pw
 
         self.avatars = {'Wizren':'M',
                         'Jihem':'M',
@@ -39,12 +40,10 @@ class Ruler:
 
     def get_assets(self):
         url = 'https://github.com/crippadan/WIZ016-GA01_Righello/raw/refs/heads/main/assets.zip'
-        pw = 'WIZ016-GA01'
         response = requests.get(url)
 
         with pyzipper.AESZipFile(io.BytesIO(response.content), 'r') as zip_file:
-            zip_file.pwd = pw.encode('utf-8')
-            file_nomi = zip_file.namelist()
+            zip_file.pwd = self.pw.encode('utf-8')
             
             with zip_file.open('assets/A.png', 'r') as file:
                 img_data = file.read()
