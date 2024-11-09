@@ -35,6 +35,7 @@ class Ruler:
                         }
 
         self.get_assets()
+        self.get_config()
 
         with self.output_box:
             print('Qual è il tuo nome?')
