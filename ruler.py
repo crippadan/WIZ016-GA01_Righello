@@ -3,6 +3,8 @@ import ipywidgets as widgets
 import pyzipper
 import io
 import requests
+import pandas as pd
+import json
 
 import warnings
 warnings.simplefilter("ignore", category=DeprecationWarning)
@@ -37,6 +39,18 @@ class Ruler:
         with self.output_box:
             print('Qual è il tuo nome?')
             self.input_text.value = ''
+
+    def get_config(self):
+        url = 'https://github.com/crippadan/WIZ016-GA01_Righello/raw/refs/heads/main/config.zip'
+        response = requests.get(url)
+        with pyzipper.AESZipFile(io.BytesIO(response.content), 'r') as zip_file:
+            zip_file.pwd = self.pw.encode('utf-8')
+            with zip_file.open('config/rules.csv', 'r') as file:
+                df = pd.read_csv(file, header=None)
+                self.rules = df[0].tolist()
+
+            with zip_file.open('config/avatars.json', 'r') as file:
+                self.avatars = json.load(file)
 
     def get_assets(self):
         url = 'https://github.com/crippadan/WIZ016-GA01_Righello/raw/refs/heads/main/assets.zip'
@@ -107,7 +121,7 @@ class Ruler:
             # Livello 1
             elif self.status == 1:
                 print('Regola numero 1.')
-                if user_input != 'Dominio':
+                if user_input != self.rules[self.status-1]:
                     image_box = widgets.VBox([self.image_widget_A, self.image_widget_B])
                     display(image_box)
                     if self.check:
@@ -124,7 +138,7 @@ class Ruler:
             # Livello 2
             elif self.status == 2:
                 print('Regola numero 2.')
-                if user_input != 'Innocenza':
+                if user_input != self.rules[self.status-1]:
                     print('\n')
                     print('BGGHVXGST')
                     display(self.image_widget_C)
@@ -142,7 +156,7 @@ class Ruler:
             # Livello 3
             elif self.status == 3:
                 print('Regola numero 3.')
-                if user_input != 'Indeterminazione':
+                if user_input != self.rules[self.status-1]:
                     print('\n')
                     print('"Net won" : "Gravità", "Seein\' tin" : "Relatività", "Beer hinges" : x')
                     print('\n')
@@ -160,7 +174,7 @@ class Ruler:
             # Livello 4
             elif self.status == 4:
                 print('Regola numero 4.')
-                if user_input != 'Inibizione':
+                if user_input != self.rules[self.status-1]:
                     print('\n')
                     print('Drowzee, G7, L5')
                     display(self.image_widget_D)
@@ -178,7 +192,7 @@ class Ruler:
             # Livello 5
             elif self.status == 5:
                 print('Regola numero 5.')
-                if user_input != 'Numero':
+                if user_input != self.rules[self.status-1]:
                     print('\n')
                     print('"Ogni enunciato (o formula o proprietà) che può essere dimostrato, cioè che può essere dedotto logicamente dagli enunciati primitivi, detti assiomi o postulati."')
                     print('\n')
@@ -198,7 +212,7 @@ class Ruler:
             # Livello 6
             elif self.status == 6:
                 print('Regola numero 6.')
-                if user_input != 'Conservazione':
+                if user_input != self.rules[self.status-1]:
                     print('\n')
                     print('"O l\'avi seri..."')
                     display(self.image_widget_F)
@@ -216,7 +230,7 @@ class Ruler:
             # Livello 7
             elif self.status == 7:
                 print('Regola numero 7.')
-                if user_input != 'Volontà':
+                if user_input != self.rules[self.status-1]:
                     print('\n')
                     print('Se son debole, non parti.')
                     print('Se son forte, non ti fermi.')
@@ -242,8 +256,6 @@ class Ruler:
 
             else:
                 raise ValueError('Errore nel cambio di stato.')
-
-            
 
             self.input_text.value = ''
 
