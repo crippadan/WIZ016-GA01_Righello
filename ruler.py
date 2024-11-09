@@ -25,15 +25,6 @@ class Ruler:
         self.check = False
         self.pw = pw
 
-        self.avatars = {'Wizren':'M',
-                        'Jihem':'M',
-                        'Emelrhyn':'F',
-                        'Elweniar':'F',
-                        'Roablind':'F',
-                        'Iuunhimaln':'F',
-                        'Widkan':'F',
-                        }
-
         self.get_assets()
         self.get_config()
 
